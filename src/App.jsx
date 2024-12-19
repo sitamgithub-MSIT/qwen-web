@@ -8,7 +8,7 @@ import Progress from "./components/Progress";
 const IS_WEBGPU_AVAILABLE = !!navigator.gpu;
 const STICKY_SCROLL_THRESHOLD = 120;
 const EXAMPLES = [
-  "Give me two tips to improve my time management skills.",
+  "Give me tips to improve my time management skills.",
   "What is the difference between AI and ML?",
   "What is the Fibonacci sequence?",
 ];
