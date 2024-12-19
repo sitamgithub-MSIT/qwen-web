@@ -1,3 +1,6 @@
+/**
+ * A React component that renders a stop icon using SVG.
+ */
 export default function StopIcon(props) {
   return (
     <svg

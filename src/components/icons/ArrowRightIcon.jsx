@@ -1,3 +1,6 @@
+/**
+ * ArrowRightIcon component renders an SVG icon of a right arrow.
+ */
 export default function ArrowRightIcon(props) {
   return (
     <svg

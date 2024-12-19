@@ -13,6 +13,10 @@ const EXAMPLES = [
   "What is the Fibonacci sequence?",
 ];
 
+/**
+ * The main application component that handles the interaction with a Web Worker
+ * to load and run a language model directly in the browser using WebGPU.
+ */
 function App() {
   // Create a reference to the worker object.
   const worker = useRef(null);
@@ -63,12 +67,9 @@ function App() {
   useEffect(() => {
     // Create the worker if it does not yet exist.
     if (!worker.current) {
-      worker.current = new Worker(
-        new URL("./worker.js", import.meta.url),
-        {
-          type: "module",
-        }
-      );
+      worker.current = new Worker(new URL("./worker.js", import.meta.url), {
+        type: "module",
+      });
       worker.current.postMessage({ type: "check" }); // Do a feature check
     }
 
@@ -212,9 +213,9 @@ function App() {
               >
                 Qwen2.5-0.5B-Instruct
               </a>
-              , a 0.5 billion parameter LLM that is optimized for inference on the
-              web. Once downloaded, the model will be cached and reused when you revisit 
-              the page.
+              , a 0.5 billion parameter LLM that is optimized for inference on
+              the web. Once downloaded, the model will be cached and reused when
+              you revisit the page.
               <br />
               <br />
               Everything runs directly in your browser using{" "}

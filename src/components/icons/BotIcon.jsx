@@ -1,3 +1,6 @@
+/**
+ * BotIcon component renders an SVG icon representing a bot.
+ */
 export default function BotIcon(props) {
   return (
     <svg

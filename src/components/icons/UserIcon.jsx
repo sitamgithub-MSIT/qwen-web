@@ -1,3 +1,6 @@
+/**
+ * UserIcon component renders a user icon using SVG.
+ */
 export default function UserIcon(props) {
   return (
     <svg
