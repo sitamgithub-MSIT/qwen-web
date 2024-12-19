@@ -37,14 +37,14 @@ function App() {
   const [tps, setTps] = useState(null);
   const [numTokens, setNumTokens] = useState(null);
 
-  const onEnter = (message) => {
+  function onEnter(message) {
     setMessages((prev) => [...prev, { role: "user", content: message }]);
     setTps(null);
     setIsRunning(true);
     setInput("");
   }
 
-  const onInterrupt = () => {
+  function onInterrupt() {
     // NOTE: We do not set isRunning to false here because the worker
     // will send a 'complete' message when it is done.
     worker.current.postMessage({ type: "interrupt" });
@@ -54,10 +54,8 @@ function App() {
     resizeInput();
   }, [input]);
 
-  const resizeInput = () => {
-    if (!textareaRef.current) {
-      return;
-    }
+  function resizeInput() {
+    if (!textareaRef.current) return;
 
     const target = textareaRef.current;
     target.style.height = "auto";
@@ -182,9 +180,7 @@ function App() {
   }, [messages, isRunning]);
 
   useEffect(() => {
-    if (!chatContainerRef.current || !isRunning) {
-      return;
-    }
+    if (!chatContainerRef.current || !isRunning) return;
     const element = chatContainerRef.current;
     if (
       element.scrollHeight - element.scrollTop - element.clientHeight <
@@ -237,7 +233,7 @@ function App() {
               <br />
               Want to learn more? Check out the source code on{" "}
               <a
-                href="https://github.com/huggingface/transformers.js-examples/tree/main/llama-3.2-webgpu"
+                href="https://github.com/sitamgithub-MSIT/qwen-web"
                 target="_blank"
                 rel="noreferrer"
                 className="underline"
