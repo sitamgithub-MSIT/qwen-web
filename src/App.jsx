@@ -37,14 +37,14 @@ function App() {
   const [tps, setTps] = useState(null);
   const [numTokens, setNumTokens] = useState(null);
 
-  function onEnter(message) {
+  const onEnter = (message) => {
     setMessages((prev) => [...prev, { role: "user", content: message }]);
     setTps(null);
     setIsRunning(true);
     setInput("");
   }
 
-  function onInterrupt() {
+  const onInterrupt = () => {
     // NOTE: We do not set isRunning to false here because the worker
     // will send a 'complete' message when it is done.
     worker.current.postMessage({ type: "interrupt" });
@@ -54,8 +54,10 @@ function App() {
     resizeInput();
   }, [input]);
 
-  function resizeInput() {
-    if (!textareaRef.current) return;
+  const resizeInput = () => {
+    if (!textareaRef.current) {
+      return;
+    }
 
     const target = textareaRef.current;
     target.style.height = "auto";
@@ -180,7 +182,9 @@ function App() {
   }, [messages, isRunning]);
 
   useEffect(() => {
-    if (!chatContainerRef.current || !isRunning) return;
+    if (!chatContainerRef.current || !isRunning) {
+      return;
+    }
     const element = chatContainerRef.current;
     if (
       element.scrollHeight - element.scrollTop - element.clientHeight <
