@@ -1,6 +1,6 @@
 # Qwen Web
 
-This is a simple web app to demonstrate how to use the [Qwen2.5 Instruct](https://huggingface.co/onnx-community/Qwen2.5-0.5B-Instruct) model in the browser using [Transformers.js](https://huggingface.co/docs/transformers.js) and ONNX Runtime Web. The application allows users to chat with the Qwen2.5 Instruct model and receive responses in real-time.
+This is a simple web app that demonstrates how to use the [Qwen2.5 Instruct](https://huggingface.co/onnx-community/Qwen2.5-0.5B-Instruct) model in the browser using [Transformers.js](https://huggingface.co/docs/transformers.js) and ONNX Runtime Web. The application allows users to chat with the Qwen2.5 Instruct model and receive real-time responses.
 
 ## Project Structure
 
@@ -24,7 +24,7 @@ The project is structured as follows:
     - `Chat.jsx`: Chat component for displaying chat messages.
     - `Progress.jsx`: Progress component for displaying progress bar.
 
-  - `style/`: CSS files for styling the application.
+  - `styles/`: CSS files for styling the application.
 
     - `index.css`: Global CSS styles for the application.
     - `Chat.css`: CSS styles for the chat interface.
@@ -62,7 +62,7 @@ Open your local host to view the web application in your browser at `http://loca
 
 ## Results
 
-The application allows users to chat with Qwen2.5 Instruct, large language model, operates within web browsers via 🤗 Transformers.js and ONNX Runtime Web.
+The application allows users to chat with Qwen2.5 Instruct, a large language model, that operates within web browsers via 🤗 Transformers.js and ONNX Runtime Web.
 
 **Note**: To see results, please refer to the `assets` folder in the repository.
 
