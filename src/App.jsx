@@ -34,6 +34,10 @@ function App() {
   // Inputs and outputs
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [systemPrompt, setSystemPrompt] = useState(
+    "You are a helpful assistant."
+  );
+  const [showSystemPromptInput, setShowSystemPromptInput] = useState(false);
   const [tps, setTps] = useState(null);
   const [numTokens, setNumTokens] = useState(null);
 
@@ -55,7 +59,9 @@ function App() {
   }, [input]);
 
   function resizeInput() {
-    if (!textareaRef.current) return;
+    if (!textareaRef.current) {
+      return;
+    }
 
     const target = textareaRef.current;
     target.style.height = "auto";
@@ -176,11 +182,20 @@ function App() {
       return;
     }
     setTps(null);
-    worker.current.postMessage({ type: "generate", data: messages });
-  }, [messages, isRunning]);
+
+    // Include system prompt as the first message
+    const messagesWithSystem = [
+      { role: "system", content: systemPrompt },
+      ...messages,
+    ];
+
+    worker.current.postMessage({ type: "generate", data: messagesWithSystem });
+  }, [messages, isRunning, systemPrompt]);
 
   useEffect(() => {
-    if (!chatContainerRef.current || !isRunning) return;
+    if (!chatContainerRef.current || !isRunning) {
+      return;
+    }
     const element = chatContainerRef.current;
     if (
       element.scrollHeight - element.scrollTop - element.clientHeight <
@@ -286,6 +301,59 @@ function App() {
           ref={chatContainerRef}
           className="overflow-y-auto scrollbar-thin w-full flex flex-col items-center h-full"
         >
+          {/* System Prompt Configuration */}
+          {messages.length === 0 && (
+            <div className="w-full max-w-[600px] p-4 mb-4">
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                    System Prompt
+                  </h3>
+                  <button
+                    onClick={() =>
+                      setShowSystemPromptInput(!showSystemPromptInput)
+                    }
+                    className="text-sm text-yellow-700 dark:text-yellow-300 hover:text-yellow-900 dark:hover:text-yellow-100 underline"
+                  >
+                    {showSystemPromptInput ? "Hide" : "Edit"}
+                  </button>
+                </div>
+                {showSystemPromptInput ? (
+                  <div className="space-y-2">
+                    <textarea
+                      value={systemPrompt}
+                      onChange={(e) => setSystemPrompt(e.target.value)}
+                      className="w-full px-3 py-2 text-sm border border-yellow-300 dark:border-yellow-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 resize-none"
+                      placeholder="Enter your system prompt..."
+                      rows={3}
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setShowSystemPromptInput(false)}
+                        className="px-3 py-1 text-sm bg-yellow-600 hover:bg-yellow-700 text-white rounded-md"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSystemPrompt("You are a helpful assistant.");
+                          setShowSystemPromptInput(false);
+                        }}
+                        className="px-3 py-1 text-sm bg-gray-500 hover:bg-gray-600 text-white rounded-md"
+                      >
+                        Reset to Default
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-yellow-700 dark:text-yellow-300 italic">
+                    &ldquo;{systemPrompt}&rdquo;
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
           <Chat messages={messages} />
           {messages.length === 0 && (
             <div>

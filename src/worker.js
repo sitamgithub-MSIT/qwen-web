@@ -76,10 +76,10 @@ async function generate(messages) {
     // past_key_values: past_key_values_cache,
 
     // Sampling
-    do_sample: true,
+    do_sample: false,
     temperature: 0.3,
 
-    max_new_tokens: 256,
+    max_new_tokens: 512,
     streamer,
     stopping_criteria,
     return_dict_in_generate: true,
