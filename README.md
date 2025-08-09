@@ -1,4 +1,4 @@
-# Qwen Web
+# Qwen-2.5 Web 🤖
 
 This is a simple web app that demonstrates how to use the [Qwen2.5 Instruct](https://huggingface.co/onnx-community/Qwen2.5-0.5B-Instruct) model in the browser using [Transformers.js](https://huggingface.co/docs/transformers.js) and ONNX Runtime Web. The application allows users to chat with the Qwen2.5 Instruct model and receive real-time responses.
 
